@@ -69,7 +69,7 @@ Okay to include empty `reviews` array (see below)
 * All fields are required, otherwise return 400 error
 * Reviews should be stored in same format indicated above on the restaurant document in a `reviews`
 property, which is an array of reviews.
-* You need to check if that user (via `email` prop) has already created a review for this restaurant. If they 
+* check if that user (via `email` prop) has already created a review for this restaurant. If they 
 have, return 400 error and don't save the review.
 
 ### Retrieve list of restuarants and their reviews

@@ -1,0 +1,40 @@
+{
+  "name": "backend-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests --recursive",
+    "test:unit": "mocha tests/unit",
+    "dev:unit": "nodemon --exec 'npm run test:unit'",
+    "test:e2e": "mocha tests/e2e",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thomson42/backend-quiz.git"
+  },
+  "author": "Christopher Thomson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thomson42/backend-quiz/issues"
+  },
+  "homepage": "https://github.com/Thomson42/backend-quiz#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.6",
+    "morgan": "^1.8.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.3.0",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0"
+  }
+}
