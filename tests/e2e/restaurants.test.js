@@ -16,7 +16,7 @@ describe('restaurant api', () => {
     beforeEach(() => connection.dropDatabase());
 
     function save(restaurant) {
-        return request.post('/api/restaurants')
+        return request.post('/restaurants')
             .send(restaurant)
             .then(({ body }) => {
                 restaurant._id = body._id;
