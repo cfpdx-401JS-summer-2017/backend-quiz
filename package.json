@@ -1,0 +1,45 @@
+{
+  "name": "backend-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "//pretest": "npm run lint",
+    "test": "mocha tests --recursive",
+    "test:watch": "npm run test -- -w",
+    "test:unit": "mocha tests/unit",
+    "test:e2e": "mocha tests/e2e",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMPotter/backend-quiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AMPotter/backend-quiz/issues"
+  },
+  "homepage": "https://github.com/AMPotter/backend-quiz#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken-promisified": "^1.0.3",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.3.0",
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0"
+  }
+}
