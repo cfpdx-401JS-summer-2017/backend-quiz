@@ -22,6 +22,29 @@ describe('restaurants model', () => {
         cuisine: 'other'
     };
 
+    let spaceRoom = {
+        name: 'Space Room',
+        address: {
+            street: 'SE Hawthorne Blvd',
+            city: 'Portland, OR'
+        },
+        cuisine: 'space food'
+    };
+
+    let kungPow = {
+        name: 'Kung Pow!',
+        address: {
+            street: 'NW 21st Avenue',
+            city: 'Portland, OR'
+        },
+        cuisine: 'asian'
+    };
+
+    let bobbyBurger = {
+        name: 'Bobby\'s Burger Palace',
+        cuisine: 'comfort'
+    };
+
     function saveRestaurant(restaurant){
         return request
             .post('/restaurants')
@@ -41,6 +64,33 @@ describe('restaurants model', () => {
             .then(res => res.body)
             .then(got => {
                 assert.deepEqual(got, losGorditos);
+            });
+    });
+
+    it('rejects unmatched cuisine', () => {
+        return saveRestaurant(spaceRoom)
+            .then(
+                () => { throw new Error('expected 400');},
+                res => {
+                    assert.equal(res.status, 400);
+                }
+            );
+    });
+
+    it('returns list of all restaurants', () => {
+        return Promise.all([
+            saveRestaurant(kungPow),
+            saveRestaurant(bobbyBurger)
+        ])
+
+            .then(savedRestaurants => {
+                kungPow = savedRestaurants[0];
+                bobbyBurger = savedRestaurants[1];
+            })
+            .then(() => request.get('/restaurants'))
+            .then(res => res.body)
+            .then(restaurants => {
+                assert.equal(restaurants.length, 3);
             });
     });
 });
