@@ -43,6 +43,30 @@ describe('restaurant api', () => {
             });
     });
 
+    // POST to /restaurant/:id/reviews:
+    // You need to check if that user (via email prop) does NOT already have a review for this restaurant. If they do, return 400 error and don't save the review.
+
+    // it('saves reviews for a restaurant', () => {
+    //     let charlie = {
+    //         name: 'Charlie\'s Deli',
+    //         address: {
+    //             street: '103 NW Main St',
+    //             city: 'Portland'
+    //         },
+    //         cuisine: 'other'
+    //     };
+
+    //     let reviews = [
+    //         { rating: 5, comments: 'I liked it', email: 'someone@email.com' },
+    //         { rating: 3, comments: 'I sort of liked it', email: 'someone3@email.com' },
+    //         { rating: 1, comments: 'I hated it', email: 'someone2@email.com' },
+    //     ];
+
+    //     return save(charlie)
+    //         .then(saved => charlie = saved)
+    //         .then()
+    // });
+
     it('gets all restaurants', () => {
         let newRestaurants = [
             { name: 'Bobby Burger', cuisine: 'comfort' },
