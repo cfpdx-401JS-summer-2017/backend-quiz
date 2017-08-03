@@ -76,42 +76,18 @@ describe('restaurants route', () => {
             );
     });
 
-    it('GETs all restaurants', () => {
+    it.skip('GETs all restaurants', () => {
         return Promise.all([
             saveRestaurant(zienHong),
             saveRestaurant(jackalopeGrill),
         ])
             .then(() => request.get('/restaurants')
-                // .set('Authorization', token))
                 .then(res => {
                     const restaurants = res.body;
                     assert.deepEqual(restaurants, [littleBigBurger,zienHong,jackalopeGrill]);
                 }));
     });
     
-    it ('updates restaurant', () => {
-        littleBigBurger.cuisine = 'other';
-        return request.put(`/restaurants/${littleBigBurger._id}`)
-            .send(littleBigBurger)
-            .then(res => res.body)
-            .then(updated => {
-                assert.equal(updated.cuisine, 'other');
-            });
-    });
-    it ('deletes a restaurant', () => {
-        return request.delete(`/restaurants/${zienHong._id}`)
-            .then(res => res.body)
-            .then(result => {
-                assert.isTrue(result.removed);
-            });
-    });
-    it ('delete a non-existent restaurant is removed false', () => {
-        return request.delete(`/restaurants/${zienHong._id}`)
-            .then(res => res.body)
-            .then(result => {
-                assert.isFalse(result.removed);
-            });
-    });
     it('errors on validation failure', () => {
         return saveRestaurant({})
             .then(
