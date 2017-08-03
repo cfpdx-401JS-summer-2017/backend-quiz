@@ -2,7 +2,7 @@ const http = require('http');
 const connect = require('./lib/connect');
 const app = require('./lib/app');
 
-const dbUri = 'mongodb://localhost:27017/job-search';
+const dbUri = 'mongodb://localhost:27017/restaurant-quiz';
 
 connect(dbUri);
 
