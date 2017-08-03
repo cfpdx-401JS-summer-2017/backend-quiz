@@ -10,7 +10,9 @@ describe('restaurants model', () => {
                 street: 'NW 10th',
                 city: 'Portland'
             },
-            cuisine: 'other'
+            cuisine: {
+                type: 'other'
+            }
 
         });
         return restaurant.validate();
