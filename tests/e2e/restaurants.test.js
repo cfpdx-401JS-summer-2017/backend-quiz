@@ -65,14 +65,21 @@ describe('restaurant API', () => {
             .get(`/restaurants/${deschutes._id}`)
             .then(res => res.body)
             .then(restaurant => {
-                console.log('restaurant is', restaurant);
-                console.log('deschutes is', deschutes);
                 assert.deepEqual(restaurant, deschutes);
             });
     });
 
-    xit('gets all the restaurants', () => {
-
+    it('gets all the restaurants', () => {
+        return Promise.all([
+            saveRestaurant(tacoBell)
+        ])
+            .then(() => request.get('/restaurants'))
+            .then(res => {
+                const deschutesRest = res.body[0];
+                const tacobellRest = res.body[1];
+                assert.ok(deschutesRest);
+                assert.ok(tacobellRest);
+            });
     });
 
 });
