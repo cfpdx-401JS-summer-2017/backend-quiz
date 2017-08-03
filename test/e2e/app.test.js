@@ -62,7 +62,6 @@ describe('restaurants REST api', () => {
             .send(restaurant)
             .then(({body}) => {
                 restaurant._id = body._id;
-                restaurant.__v = body.__v;
                 return body;
             });
     }
@@ -73,13 +72,13 @@ describe('restaurants REST api', () => {
             saveRestaurant(olivars)
         ])
             .then(() => {
-                return request.get('/resturants');
+                return request.get('/restaurants');
             })
             .then( res => {
                 let restaurants = res.body;
                 assert.equal(restaurants.length, 2);
-                assert.deepInclude(restaurants, chipotle);
-                assert.deepInclude(restaurants, olivars);
+                assert.equal(restaurants[1].name, chipotle.name);
+                assert.equal(restaurants[0].name, olivars.name);
             });
     });
 })
