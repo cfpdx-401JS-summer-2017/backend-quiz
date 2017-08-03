@@ -60,25 +60,51 @@ describe('restaurants REST api', () => {
     function saveRestaurant(restaurant) {
         return request.post('/restaurants')
             .send(restaurant)
-            .then(({body}) => {
+            .then(({ body }) => {
                 restaurant._id = body._id;
                 return body;
             });
     }
 
     it('gets a list of restaurants', () => {
-        return Promise.all([
-            saveRestaurant(chipotle),
-            saveRestaurant(olivars)
-        ])
+        return saveRestaurant(chipotle)
+            .then(() => saveRestaurant(olivars))
             .then(() => {
                 return request.get('/restaurants');
             })
-            .then( res => {
+            .then(res => {
                 let restaurants = res.body;
                 assert.equal(restaurants.length, 2);
-                assert.equal(restaurants[1].name, chipotle.name);
-                assert.equal(restaurants[0].name, olivars.name);
+                assert.equal(restaurants[0].name, chipotle.name);
+                assert.equal(restaurants[1].name, olivars.name);
             });
     });
-})
+
+    it.skip('gets a restaurant based on cuisine query', () => {
+        return request.get('/restaurants?cuisine=northwest')
+            .then(res => {
+                let restaurant = res.body;
+                assert.equal(restaurant.cuisine, 'northwest');
+                assert.equal(restaurant.name, 'Mexican Burritos, American Style');
+            });
+    });
+
+    it.skip('gets a restaurant by id, including its reviews', () => {
+        return Promise.all([
+            request.put(`/restaurants/${chipotle._id}`)
+                .send(review1),
+            request.put(`/restaurants/${chipotle._id}`)
+                .send(review2),
+            request.put(`/restaurants/${chipotle._id}`)
+                .send(review3)
+        ])
+            .then(() => {
+                return request.get(`/restaurants/${chipotle._id}`);
+            })
+            .then(res => {
+                let returned = res.body;
+                assert.equal(returned.reviews.length, 3);
+            });
+
+    });
+});
