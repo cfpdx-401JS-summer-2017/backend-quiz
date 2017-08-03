@@ -76,11 +76,10 @@ describe('reviews model', () => {
     }
 
     it('roundtrips a new review', () => {
-        console.log('losGorditos._id = ', losGorditos._id);
         let losGorditosReview = {
             rating: 5,
-            comments: 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...',
-            email: 'somebody@yelp.com',
+            comments: 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.',
+            email: 'user1@yelp.com',
             restaurant: losGorditos._id
         };
         return saveReview(losGorditosReview, losGorditos)
@@ -94,6 +93,46 @@ describe('reviews model', () => {
             .then(res => res.body)
             .then(got => {
                 assert.deepEqual(got, losGorditosReview);
+            });
+    });
+
+    it('rejects too low a rating', () => {
+        let bobbyBurgerReview = {
+            rating: 0,
+            comments: 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.',
+            email: 'user2@yelp.com',
+            restaurant: spaceRoom._id
+        };
+        return saveReview(bobbyBurgerReview, bobbyBurger)
+            .then(
+                () => { throw new Error('expected 400');},
+                res => {
+                    assert.equal(res.status, 400);
+                }
+            );
+    });
+
+    it('returns list of all reviews', () => {
+        let spaceRoomReview = {
+            rating: 4,
+            comments: 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.',
+            email: 'user3@yelp.com',
+            restaurant: spaceRoom._id
+        };
+        let kungPowReview = {
+            rating: 2,
+            comments: 'There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.',
+            email: 'user4@yelp.com',
+            restaurant: kungPow._id
+        };
+        return Promise.all([
+            saveReview(spaceRoomReview, spaceRoom),
+            saveReview(kungPowReview, kungPow)
+        ])
+            .then(() => request.get('/reviews'))
+            .then(res => res.body)
+            .then(reviews => {
+                assert.equal(reviews.length, 3);
             });
     });
 });

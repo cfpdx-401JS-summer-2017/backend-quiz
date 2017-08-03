@@ -82,11 +82,6 @@ describe('restaurants model', () => {
             saveRestaurant(kungPow),
             saveRestaurant(bobbyBurger)
         ])
-
-            .then(savedRestaurants => {
-                kungPow = savedRestaurants[0];
-                bobbyBurger = savedRestaurants[1];
-            })
             .then(() => request.get('/restaurants'))
             .then(res => res.body)
             .then(restaurants => {
