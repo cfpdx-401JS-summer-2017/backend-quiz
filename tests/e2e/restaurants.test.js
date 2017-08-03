@@ -77,8 +77,8 @@ describe('restaurant API', () => {
             .then(res => {
                 const deschutesRest = res.body[0];
                 const tacobellRest = res.body[1];
-                assert.ok(deschutesRest);
-                assert.ok(tacobellRest);
+                assert.deepEqual(deschutesRest, {_id:`${deschutes._id}`, name:'deschutes', cuisine:'northwest'});
+                assert.deepEqual(tacobellRest, {_id:`${tacoBell._id}`, name:'tacobell', cuisine:'other'});
             });
     });
 
