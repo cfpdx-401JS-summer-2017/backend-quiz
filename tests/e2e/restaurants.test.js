@@ -88,4 +88,12 @@ describe('restaurants model', () => {
                 assert.equal(restaurants.length, 3);
             });
     });
+
+    // it('finds by cuisine', () => {
+    //     return request.get(`/restaurants/${kungPow.cuisine}`)
+    //         .then(res => res.body)
+    //         .then(restaurants => {
+    //             assert.equal(restaurants.length, 1);
+    //         });
+    // });
 });
