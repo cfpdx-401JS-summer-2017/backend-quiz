@@ -65,5 +65,26 @@ describe('restaurant api', () => {
                 assert.deepEqual(res.body, newArray);
             });
     });
+
+    it('gets a restaurant by id', () => {
+        let christy = {
+            name: 'Christy\'s Deli',
+            address: {
+                street: '101 NW Main St',
+                city: 'Portland'
+            },
+            cuisine: 'asian',
+            reviews: []
+        };
+
+        return save(christy)
+            .then(saved => christy = saved)
+            .then(() => request.get(`/restaurants/${christy._id}`))
+            .then(res => {
+                assert.deepEqual(res.body, christy);
+            });
+
+
+    });
     
 });
