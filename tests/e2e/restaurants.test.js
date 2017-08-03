@@ -12,7 +12,7 @@ const connection = require('mongoose').connection;
 const app = require('../../lib/app');
 const request = chai.request(app);
 
-describe('REST API for restaurants', () => {
+xdescribe('REST API for restaurants', () => {
 
     before(() => connection.dropDatabase());
 
@@ -27,7 +27,7 @@ describe('REST API for restaurants', () => {
     };
 
     function saveRestaurant(restaurant) {
-        return request.post('/api/restaurants')
+        return request.post('/restaurants')
             .send(restaurant)
             .then(({ body }) => {
                 restaurant._id = body._id;
