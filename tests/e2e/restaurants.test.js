@@ -23,6 +23,16 @@ describe('restaurant API', () => {
                 rating: 3,
                 comments: 'beer was pretty good',
                 email: 'meryl@meryl.com'
+            },
+            {
+                rating: 5,
+                comments: 'beer was amazing',
+                email: 'girl@girl.com'
+            },
+            {
+                rating: 1,
+                comments: 'beer was gross',
+                email: 'bob@bob.com'
             }
         ]
     };
@@ -38,6 +48,21 @@ describe('restaurant API', () => {
             }
         ]
     };
+
+    const review1 = {
+        rating: 1,
+        comments: 'not good',
+        email: 'joe@joe.com'
+    };
+
+    function saveReview(review){
+        return request.post(`/restaurants/${tacoBell._id}/reviews`)
+            .send(review)
+            .then(({ body }) => {
+                review._id = body._id;
+                return body;
+            });
+    }
 
     function saveRestaurant(restaurant) {
         return request.post('/restaurants')
@@ -60,6 +85,14 @@ describe('restaurant API', () => {
             });
     });
 
+    xit ('saves a review', () => {
+        return saveReview(review1)
+            .then(savedReview => {
+                assert.ok(savedReview._id);
+                assert.equal(savedReview.rating, 1);
+            });
+    });
+
     it('gets a restaurant if it exists', () => {
         return request
             .get(`/restaurants/${deschutes._id}`)
@@ -77,8 +110,27 @@ describe('restaurant API', () => {
             .then(res => {
                 const deschutesRest = res.body[0];
                 const tacobellRest = res.body[1];
-                assert.deepEqual(deschutesRest, {_id:`${deschutes._id}`, name:'deschutes', cuisine:'northwest'});
-                assert.deepEqual(tacobellRest, {_id:`${tacoBell._id}`, name:'tacobell', cuisine:'other'});
+                assert.deepEqual(deschutesRest, { _id: `${deschutes._id}`, name: 'deschutes', cuisine: 'northwest' });
+                assert.deepEqual(tacobellRest, { _id: `${tacoBell._id}`, name: 'tacobell', cuisine: 'other' });
+            });
+    });
+
+    it('gets three reviews from a restaurant', () => {
+        return request
+            .get(`/restaurants/${deschutes._id}`)
+            .then(res => res.body)
+            .then(restaurant => {
+                assert.equal(restaurant.reviews.length, 3);
+            });
+    });
+
+    xit('uses query to find rest with that cuisine', () => {
+        return request
+            .get('/restaurants?cuisine=northwest')
+            .then(res => res.body)
+            .then(restaurant => {
+                console.log('restaurant is', restaurant);
+                assert.deepEqual(restaurant, deschutes);
             });
     });
 
