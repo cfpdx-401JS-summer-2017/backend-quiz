@@ -32,7 +32,8 @@ describe('restaurant api', () => {
                 street: '102 NW Main St',
                 city: 'Portland'
             },
-            cuisine: 'asian'
+            cuisine: 'asian',
+            reviews: []
         };
 
         return save(joelDeli)
