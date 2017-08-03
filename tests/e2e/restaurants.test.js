@@ -42,5 +42,28 @@ describe('restaurant api', () => {
                 assert.deepEqual(saved, joelDeli);
             });
     });
+
+    it('gets all restaurants', () => {
+        let newRestaurants = [
+            { name: 'Bobby Burger', cuisine: 'comfort' },
+            { name: 'Kung Pow!', cuisine: 'asian' },
+            { name: 'Whole Foods', cuisine: 'other' }
+        ];
+
+        let newArray = [];
+
+        return Promise.all(newRestaurants.map(save))
+            .then(saved => {
+                saved.map(a => {
+                    newArray.push({ _id: a._id, name: a.name, cuisine: a.cuisine });
+                });
+            })
+
+            .then(() => request.get('/restaurants'))
+            .then(res => {
+                // console.log(res.body);
+                assert.deepEqual(res.body, newArray);
+            });
+    });
     
 });
