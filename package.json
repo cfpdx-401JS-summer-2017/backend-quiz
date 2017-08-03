@@ -1,0 +1,33 @@
+{
+  "name": "backend-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mocha": "^3.5.0",
+    "mongoose": "^4.11.5"
+  },
+  "scripts": {
+    "test": "mocha tests --recursive",
+    "test:watch": "npm run test -- -w",
+    "test:unit": "mocha tests/unit",
+    "test:e2e": "mocha tests/e2e",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinytort/backend-quiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tinytort/backend-quiz/issues"
+  },
+  "homepage": "https://github.com/tinytort/backend-quiz#readme"
+}
