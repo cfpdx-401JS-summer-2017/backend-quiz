@@ -44,7 +44,10 @@ describe('restaurants route', () => {
         return request
             .post('/restaurants')
             .send(restaurant)
-            .then(res => res.body);
+            .then(res => {
+                restaurant._id = res.body._id;
+                return res.body;
+            });
     }
 
     it('roundtrips a new restaurant', () => {
@@ -73,20 +76,17 @@ describe('restaurants route', () => {
             );
     });
 
-    it('returns list of all restaurants', () => {
+    it('GETs all restaurants', () => {
         return Promise.all([
             saveRestaurant(zienHong),
-            saveRestaurant(jackalopeGrill)
+            saveRestaurant(jackalopeGrill),
         ])
-            .then(savedRestaurants => {
-                zienHong = savedRestaurants[1];
-                jackalopeGrill = savedRestaurants[2];
-            })
-            .then(() => request.get('/restaurants'))
-            .then(res => res.body)
-            .then(restaurants => {
-                assert.isTrue(restaurants.length>1);
-            });
+            .then(() => request.get('/restaurants')
+                // .set('Authorization', token))
+                .then(res => {
+                    const restaurants = res.body;
+                    assert.deepEqual(restaurants, [littleBigBurger,zienHong,jackalopeGrill]);
+                }));
     });
     
     it ('updates restaurant', () => {
@@ -98,7 +98,7 @@ describe('restaurants route', () => {
                 assert.equal(updated.cuisine, 'other');
             });
     });
-    it ('deletes an restaurant', () => {
+    it ('deletes a restaurant', () => {
         return request.delete(`/restaurants/${zienHong._id}`)
             .then(res => res.body)
             .then(result => {
