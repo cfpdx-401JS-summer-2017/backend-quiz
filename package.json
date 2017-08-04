@@ -1,0 +1,34 @@
+{
+  "name": "backend-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "mocha tests/e2e",
+    "test:unit": "mocha tests/unit",
+    "test": "mocha tests --recursive",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christylaguardia/backend-quiz.git"
+  },
+  "author": "Christy La Guardia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christylaguardia/backend-quiz/issues"
+  },
+  "homepage": "https://github.com/christylaguardia/backend-quiz#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.3.0",
+    "mocha": "^3.5.0"
+  }
+}
