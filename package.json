@@ -1,0 +1,36 @@
+{
+  "name": "backend-quiz",
+  "version": "1.0.0",
+  "description": "Backend Quiz",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "//pretest": "npm run lint",
+    "test": "mocha tests --recursive",
+    "test:watch": "npm run test -- -w",
+    "test:e2e": "mocha tests/e2e",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anwarmontasir/backend-quiz.git"
+  },
+  "author": "Anwar Montasir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anwarmontasir/backend-quiz/issues"
+  },
+  "homepage": "https://github.com/anwarmontasir/backend-quiz#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.3.0",
+    "mocha": "^3.5.0"
+  }
+}
