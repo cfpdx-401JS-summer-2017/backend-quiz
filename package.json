@@ -1,0 +1,35 @@
+{
+    "name": "backend-quiz",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "mocha tests --recursive --reporter mocha-better-spec-reporter",
+        "start": "nodemon --watch lib --watch tests --exec 'npm test'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wbeck32/backend-quiz.git"
+    },
+    "author": "Wendy Beck",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/wbeck32/backend-quiz/issues"
+    },
+    "dependencies": {
+        "body-parser": "^1.17.1",
+        "dotenv": "^4.0.0",
+        "express": "^4.15.2",
+        "mongoose": "^4.9.6"
+    },
+    "devDependencies": {
+        "body-parser": "^1.17.2",
+        "chai": "^4.1.0",
+        "chai-http": "^3.0.0",
+        "dotenv": "^4.0.0",
+        "express": "^4.15.3",
+        "mocha": "^3.5.0",
+        "mocha-better-spec-reporter": "^3.1.0",
+        "mongoose": "^4.11.5"
+    }
+}
