@@ -130,8 +130,8 @@ need to assert correctness):
 * Test this workflow (structure into `describe`/`it`):
   * POST two pets, each of a different type
   * POST two raves from one user emails to both of the pets
-  * POST one rave from another user email to both of the pets
+  * POST two raves from another user email to both of the pets
   * **Test** that `GET` `/pets` returns both pets
   * **Test** that `GET` `/pets?type=<one of the pet types>` only returns the one correct pet
   * **Test** that `GET` `/raves` returns all four raves plus pet name and type
-  * **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two reviews
+  * **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two raves
